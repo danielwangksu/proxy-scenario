@@ -51,7 +51,6 @@ void main(int argc, char ** argv){
     while(1){
         sleep(2);
         prepare(data[i]);
-        i++;
         ipc_send(client_ep, &m);
         // poll receive and decide
         r = ipc_receive(client_ep, &m, &status);
@@ -59,6 +58,7 @@ void main(int argc, char ** argv){
 
         if(data[i] == -1)
             exit(0);
+        i++;
     }
     exit(0);
 }
