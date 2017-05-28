@@ -94,7 +94,7 @@ int deserialize(net_packet *packet)
     m.m_m9.m9l2 = ntohl(packet->callnr);
     m.m_m9.m9l3 = ntohl(packet->net_size);
 
-    if (m.m_m9.m9l2 != 0)
+    if (m.m_m9.m9l3 != 0)
         // need deserialize large data struct
         return EINVAL;
     return OK;
@@ -153,26 +153,29 @@ void main(int argc, char ** argv){
     local_adr_len = sizeof local_adr;
 
     if (local_adr.sin_addr.s_addr == INADDR_NONE)
-        bail("[IN_PROXY]: bad address");
+        bail("[INPROXY]: bad address");
 
     socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (socket_fd == -1)
-        bail("[IN_PROXY]: socket()");
+        bail("[INPROXY]: socket()");
 
     if(bind(socket_fd, (struct sockaddr *) &local_adr, sizeof(local_adr)) < 0)
-        bail("[IN_PROXY]: bind()");
+        bail("[INPROXY]: bind()");
 
     while(1){
         client_adr_len = sizeof(client_adr);
 
-        printf("[IN_PROXY]: start sending socketID=%d, %s\n", socket_fd, inet_ntoa(local_adr.sin_addr));
+        printf("[INPROXY]: start receiving socketID=%d, %s\n", socket_fd, inet_ntoa(local_adr.sin_addr));
         receive_status = recvfrom(socket_fd, &packet, sizeof(net_packet), 0, (struct sockaddr *)&client_adr, &client_adr_len);
         if (receive_status < 0)
-            bail("[IN_PROXY]: recvfrom(2)");
+            bail("[INPROXY]: recvfrom(2)");
         // decrypt message, check message, and send to server
+        printf("[INPROXY]: received");
         r = deserialize(&packet);
         if (r != OK)
             continue;
+
+        printf("[IN_PROXY]: deserialize %d, %d, %d, %d, %d\n", dest_acid, source_acid, m.m_m9.m9l1, m.m_m9.m9l2, m.m_m9.m9l3);
         r = deliver_message();
         if (r != OK)
             continue;

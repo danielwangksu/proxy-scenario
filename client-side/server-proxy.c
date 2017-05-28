@@ -47,7 +47,7 @@ void confirm()
     type = m.m_type;
     result = m.m_m9.m9ull1;
     original_from = m.m_m9.m9ull2;
-    printf("[SERVER-PROXY]: the confirm message has been received from outproxy (%d), type=%d, result=%d, original_from=%d\n", type, result, original_from);
+    printf("[SERVER-PROXY]: the confirm message has been received from outproxy, type=%d, result=%d, original_from=%d\n", type, result, original_from);
 }
 
 
@@ -97,7 +97,7 @@ void receive_network()
     m_in.m_m1.m1i1 = m.m_m9.m9l2;
     size = m.m_m9.m9l3;
 
-    ipc_send(dest_ep, &m_in);
+    r = ipc_send(dest_ep, &m_in);
     if(r != OK)
         printf("[SERVER-PROXY]: send failed\n");
 }

@@ -31,6 +31,7 @@ void initialize(){
  *===========================================================================*/
 int response(int data)
 {
+    memset(&m, 0, sizeof(m));
     m.m_type = CLI_SER_SPECIFIC;
     m.m_m1.m1i1 = data;
     return ipc_send(server_ep, &m);

@@ -44,7 +44,7 @@ void prepare(int data){
 void main(int argc, char ** argv){
     int r, status;
     int i = 0;
-    int data[10] = {1, 11, 22, 33, 44, 55, 666, 87, 90, 100, -1};
+    int data[] = {1, 11, 22, 33, 44, 55, 666, 87, 90, 100, -1};
 
     initialize();
 
