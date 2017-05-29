@@ -70,7 +70,7 @@ void send_network()
     m_out.m_m9.m9l1 = m.m_type;
     m_out.m_m9.m9l2 = m.m_m1.m1i1;
     m_out.m_m9.m9l3 = 0;
-    printf("[CLIENT-PROXY]: proxy_type:%d, from:%d, m_type:%d, data:%d\n", m_out.m_type, m_out.m_m9.m9ull1,  m_out.m_m9.m9l1, m_out.m_m9.m9l2);
+    printf("[CLIENT-PROXY]: proxy_type:%d, from:%lu, m_type:%ld, data:%ld\n", m_out.m_type, m_out.m_m9.m9ull1,  m_out.m_m9.m9l1, m_out.m_m9.m9l2);
 
     r = ipc_send(outproxy_ep, &m_out);
     if(r != OK)

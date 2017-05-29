@@ -175,7 +175,7 @@ void main(int argc, char ** argv){
         if (r != OK)
             continue;
 
-        printf("[IN_PROXY]: deserialize %d, %d, %d, %d, %d\n", dest_acid, source_acid, m.m_m9.m9l1, m.m_m9.m9l2, m.m_m9.m9l3);
+        printf("[IN_PROXY]: deserialize %d, %d, %ld, %ld, %ld\n", dest_acid, source_acid, m.m_m9.m9l1, m.m_m9.m9l2, m.m_m9.m9l3);
         r = deliver_message();
         if (r != OK)
             continue;

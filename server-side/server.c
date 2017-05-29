@@ -52,12 +52,16 @@ void main(int argc, char ** argv){
         sleep(2);
         prepare(data[i]);
         ipc_send(client_ep, &m);
+
+        if(data[i] == -1)
+        {
+            printf("[SERVER]: server terminate\n");
+            exit(0);
+        }
         // poll receive and decide
         r = ipc_receive(client_ep, &m, &status);
         printf("[SERVER]: receive data m_type: %d, value: %d\n", m.m_type, m.m_m1.m1i1);
 
-        if(data[i] == -1)
-            exit(0);
         i++;
     }
     exit(0);
