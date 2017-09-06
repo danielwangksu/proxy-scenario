@@ -171,13 +171,16 @@ void main(int argc, char ** argv){
         if (receive_status < 0)
             bail("[INPROXY]: recvfrom(2)");
         // decrypt message, check message, and send to server
+        printf("[INPROXY]: received");
         r = deserialize(&packet);
         if (r != OK)
             continue;
-        printf("[IN_PROXY]: %d, %d, %ld, %ld, %ld\n", dest_acid, source_acid, m.m_m9.m9l1, m.m_m9.m9l2, m.m_m9.m9l3);
 
+        printf("[IN_PROXY]: deserialize %d, %d, %ld, %ld, %ld\n", dest_acid, source_acid, m.m_m9.m9l1, m.m_m9.m9l2, m.m_m9.m9l3);
         r = deliver_message();
         if (r != OK)
             continue;
     }
+    close(socket_fd);
+    exit(0);
 }

@@ -112,6 +112,7 @@ int deliver_message()
     int r;
     r = acid_to_endpoint(dest_acid, &dest_e);
     r = acid_to_endpoint(source_acid, &source_e);
+    printf("[INPROXY]: dest_e:%d, source_e:%d\n", dest_e, source_e);
     m.m_type = PROXY_RECEIVEFROM;
     m.m_m9.m9ull1 = dest_e;
 
